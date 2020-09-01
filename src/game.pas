@@ -1,4 +1,4 @@
-program audio_music_stream;
+program game_name;
 
 {$MODE objfpc}
 
@@ -18,8 +18,11 @@ begin
     // options 
     InitWindow(screenWidth, screenHeight, 'Game Title');
     SetTargetFPS(60);
-    while  not WindowShouldClose() do begin
-        // gameplay
+    while not WindowShouldClose() do begin
+        // pause key
+        if IsKeyPressed(KEY_P) then pause := pause xor true;
+
+        // game code
         if not pause then begin
 
 
@@ -27,7 +30,8 @@ begin
         // rendering
         BeginDrawing();
         ClearBackground(BLACK);
-      
+        
+        if pause then DrawText('paused.', screenWidth div 2, screenHeight div 2, 20, WHITE);
         EndDrawing();
     end;
     CloseWindow();
